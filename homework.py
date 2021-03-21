@@ -2,10 +2,13 @@ import datetime as dt
 
 
 class Record:
-    def __init__(self, amount, comment, date=dt.date.today()):
+    def __init__(self, amount, comment, date=None):
         self.amount = amount
-        self.date = date
         self.comment = comment
+        if date is None:
+            self.date = dt.date.today()
+        else:
+            self.date = dt.datetime.strptime(date, "%d.%m.%Y").date()
 
     def __str__(self):
         return f'{self.amount}, {self.comment}, {self.date}'
@@ -20,7 +23,13 @@ class Calculator:
         self.records.append(record)
 
     def get_today_stats(self):
-        return sum(record.amount for record in self.records)
+        today_amount = 0
+        for record in self.records:
+            if record.date == dt.date.today():
+                today_amount += record.amount
+            else:
+                pass
+        return today_amount
 
     def get_week_stats():
         pass
@@ -49,27 +58,27 @@ class CashCalculator(Calculator):
             if self.limit - wasted_cash > 0:
                 return (
                     f'На сегодня осталось '
-                    f'{(self.limit - wasted_cash) / USD_RATE} usd'
+                    f'{(self.limit - wasted_cash) / USD_RATE} USD'
                 )
             elif self.limit - wasted_cash == 0:
                 return 'Денег нет, держись'
             else:
                 return (
                     f'Денег нет, держись: твой долг - '
-                    f'{-(self.limit - wasted_cash)} usd'
+                    f'{-(self.limit - wasted_cash)} USD'
                 )
         else:
             if self.limit - wasted_cash > 0:
                 return (
                     f'На сегодня осталось '
-                    f'{(self.limit - wasted_cash) / EURO_RATE} euro'
+                    f'{(self.limit - wasted_cash) / EURO_RATE} Euro'
                 )
             elif self.limit - wasted_cash == 0:
                 return 'Денег нет, держись'
             else:
                 return (
                     f'Денег нет, держись: твой долг - '
-                    f'{-(self.limit - wasted_cash) / EURO_RATE} euro'
+                    f'{-(self.limit - wasted_cash) / EURO_RATE} Euro'
                 )
 
 
@@ -78,7 +87,7 @@ class CaloriesCalculator(Calculator):
         wasted_calories = self.get_today_stats
         if self.limit - wasted_calories > 0:
             return (
-                f'Сегодня можно съесть что-нибудь ещё, но с общей '
+                'Сегодня можно съесть что-нибудь ещё, но с общей '
                 f'калорийностью не более {self.limit - wasted_calories} кКал'
             )
         else:
