@@ -47,45 +47,29 @@ class CashCalculator(Calculator):
 
     def get_today_cash_remained(self, currency):
         wasted_cash = self.get_today_stats()
+
+        def comparison(rate, output):
+            if self.limit - wasted_cash > 0:
+                return (
+                    f'На сегодня осталось {round(((self.limit - wasted_cash) / rate), 2)} '
+                    f'{output}'
+                )
+            elif self.limit - wasted_cash == 0:
+                return 'Денег нет, держись'
+            else:
+                return (
+                    'Денег нет, держись: твой долг - '
+                    f'{round(-((self.limit - wasted_cash) / rate), 2)} {output}'
+                )
+
         if currency == 'rub':
-            if self.limit - wasted_cash > 0:
-                return (
-                    f'На сегодня осталось {self.limit - wasted_cash} '
-                    f'руб'
-                )
-            elif self.limit - wasted_cash == 0:
-                return 'Денег нет, держись'
-            else:
-                return (
-                    f'Денег нет, держись: твой долг - '
-                    f'{-(self.limit - wasted_cash)} руб'
-                )
+            return comparison(self.RUB_RATE, 'руб')
         elif currency == 'usd':
-            if self.limit - wasted_cash > 0:
-                return (
-                    f'На сегодня осталось '
-                    f'{(self.limit - wasted_cash) / USD_RATE} USD'
-                )
-            elif self.limit - wasted_cash == 0:
-                return 'Денег нет, держись'
-            else:
-                return (
-                    f'Денег нет, держись: твой долг - '
-                    f'{-(self.limit - wasted_cash)} USD'
-                )
+            return comparison(self.USD_RATE, 'USD')
+        elif currency == 'eur':
+            return comparison(self.EURO_RATE, 'Euro')
         else:
-            if self.limit - wasted_cash > 0:
-                return (
-                    f'На сегодня осталось '
-                    f'{(self.limit - wasted_cash) / EURO_RATE} Euro'
-                )
-            elif self.limit - wasted_cash == 0:
-                return 'Денег нет, держись'
-            else:
-                return (
-                    f'Денег нет, держись: твой долг - '
-                    f'{-(self.limit - wasted_cash) / EURO_RATE} Euro'
-                )
+            raise ValueError('Wrong currency')
 
 
 class CaloriesCalculator(Calculator):
@@ -114,6 +98,7 @@ cash_calculator.add_record(Record(amount=3000,
                                   comment='бар в Танин др',
                                   date='08.11.2019'))
 
-print(cash_calculator.get_today_cash_remained('rub'))
+print(cash_calculator.get_today_cash_remained('eur'))
 # должно напечататься
 # На сегодня осталось 555 руб
+print(cash_calculator.get_week_stats)
