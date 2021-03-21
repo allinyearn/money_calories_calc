@@ -31,9 +31,10 @@ class Calculator:
     def get_week_stats(self):
         period = dt.timedelta(days=7)
         today = dt.date.today()
+        week_ago = today - period
         week_amount = 0
         for record in self.records:
-            if today - record.date <= period:
+            if today >= record.date > week_ago:
                 week_amount += record.amount
             else:
                 pass
@@ -51,7 +52,8 @@ class CashCalculator(Calculator):
         def comparison(rate, output):
             if self.limit - wasted_cash > 0:
                 return (
-                    f'На сегодня осталось {round(((self.limit - wasted_cash) / rate), 2)} '
+                    'На сегодня осталось '
+                    f'{round(((self.limit - wasted_cash) / rate), 2)} '
                     f'{output}'
                 )
             elif self.limit - wasted_cash == 0:
@@ -59,7 +61,8 @@ class CashCalculator(Calculator):
             else:
                 return (
                     'Денег нет, держись: твой долг - '
-                    f'{round(-((self.limit - wasted_cash) / rate), 2)} {output}'
+                    f'{round(-((self.limit - wasted_cash) / rate), 2)} '
+                    f'{output}'
                 )
 
         if currency == 'rub':
