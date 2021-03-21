@@ -10,9 +10,6 @@ class Record:
         else:
             self.date = dt.datetime.strptime(date, "%d.%m.%Y").date()
 
-    def __str__(self):
-        return f'{self.amount}, {self.comment}, {self.date}'
-
 
 class Calculator:
     def __init__(self, limit):
@@ -31,13 +28,22 @@ class Calculator:
                 pass
         return today_amount
 
-    def get_week_stats():
-        pass
+    def get_week_stats(self):
+        period = dt.timedelta(days=7)
+        today = dt.date.today()
+        week_amount = 0
+        for record in self.records:
+            if today - record.date <= period:
+                week_amount += record.amount
+            else:
+                pass
+        return week_amount
 
 
 class CashCalculator(Calculator):
     USD_RATE = 73.73
     EURO_RATE = 87.86
+    RUB_RATE = 1.0
 
     def get_today_cash_remained(self, currency):
         wasted_cash = self.get_today_stats()
@@ -84,7 +90,7 @@ class CashCalculator(Calculator):
 
 class CaloriesCalculator(Calculator):
     def get_calories_remained(self):
-        wasted_calories = self.get_today_stats
+        wasted_calories = self.get_today_stats()
         if self.limit - wasted_calories > 0:
             return (
                 'Сегодня можно съесть что-нибудь ещё, но с общей '
