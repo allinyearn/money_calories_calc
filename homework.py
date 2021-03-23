@@ -21,8 +21,6 @@ class Record:
 
 class Calculator:
     limit: int
-    today_amount: int
-    week_amount: int
 
     def __init__(self, limit: int) -> None:
         self.limit = limit
@@ -67,7 +65,7 @@ class CashCalculator(Calculator):
             'eur': (self.EURO_RATE, 'Euro')
         }
         if currency in rates:
-            rate, output = rates[currency][0], rates[currency][1]
+            rate, output = rates[currency]
         else:
             raise ValueError('Wrong currency')
         rate_division = abs(round(remainder / rate, 2))
