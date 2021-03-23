@@ -8,7 +8,7 @@ class Record:
     comment: str
     date: Optional[str]
 
-    def __init__(self, amount: int, comment: str, 
+    def __init__(self, amount: int, comment: str,
                  date: Optional[str] = None) -> None:
         self.amount = amount
         self.comment = comment
@@ -19,16 +19,15 @@ class Record:
 
 
 class Calculator:
-    CustomType = List[Tuple[int, str, Optional[str]]]
     limit: int
-    records: CustomType
+    records: List[Tuple[int, str, Optional[str]]]
     record: Tuple[int, str, Optional[str]]
     today_amount: int
     week_amount: int
 
     def __init__(self, limit: int) -> None:
         self.limit = limit
-        self.records: CustomType = []
+        self.records: List[Tuple[int, str, Optional[str]]] = []
 
     def add_record(self, record: Tuple[int, str, Optional[str]]) -> None:
         """Добавляем новую запись о расходах."""
