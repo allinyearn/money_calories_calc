@@ -1,5 +1,5 @@
 import datetime as dt
-from typing import Union, Optional, Tuple, List
+from typing import Union, Optional, Tuple, List, Dict
 
 
 class Record:
@@ -37,11 +37,8 @@ class Calculator:
     def get_today_stats(self) -> int:
         """Получаем количество потраченных сегодня денег или калорий"""
         date_today = dt.date.today()
-        today_amount: int = 0
-        for record in self.records:
-            if record.date == date_today:
-                today_amount += record.amount
-        return today_amount
+        return sum(record.amount for record in self.records if record.date
+                   == date_today)
 
     def get_week_stats(self) -> int:
         """Получаем количество потраченных за неделю денег или калорий"""
@@ -66,34 +63,34 @@ class CashCalculator(Calculator):
     EURO_RATE: int = 87.86
     RUB_RATE: int = 1.0
 
-    def get_today_cash_remained(self, currency: str) -> Union[str, int]:
-        """Получаем ответ от калькулятора на основе расчитанного остатка"""
+    def get_today_cash_remained(self, currency) -> Union[str, int]:
+        """Получаем ответ исходя из остатка"""
         remainder = self.get_today_remainder()
-
-        def comparison(rate, output):
-            """Сравниваем остаток с лимитом и берём подходящий ответ"""
-            if remainder == 0:
-                return 'Денег нет, держись'
-            rate_division = abs(round(remainder / rate, 2))
-            if remainder > 0:
-                return (
-                    'На сегодня осталось '
-                    f'{rate_division} '
-                    f'{output}'
-                )
-            else:
-                return (
-                    'Денег нет, держись: твой долг - '
-                    f'{rate_division} '
-                    f'{output}'
-                )
-        if currency == 'rub':
-            return comparison(self.RUB_RATE, 'руб')
-        elif currency == 'usd':
-            return comparison(self.USD_RATE, 'USD')
-        elif currency == 'eur':
-            return comparison(self.EURO_RATE, 'Euro')
-        raise ValueError('Wrong currency')
+        rates: Dict[str, Tuple[int, str]] = {
+            'rub': [self.RUB_RATE, 'руб'],
+            'usd': [self.USD_RATE, 'USD'],
+            'eur': [self.EURO_RATE, 'Euro']
+        }
+        if currency in rates:
+            rate = rates[currency][0]
+            output = rates[currency][1]
+        else:
+            raise ValueError('Wrong currency')
+        if remainder == 0:
+            return 'Денег нет, держись'
+        rate_division = abs(round(remainder / rate, 2))
+        if remainder > 0:
+            return (
+                'На сегодня осталось '
+                f'{rate_division} '
+                f'{output}'
+            )
+        else:
+            return (
+                'Денег нет, держись: твой долг - '
+                f'{rate_division} '
+                f'{output}'
+            )
 
 
 class CaloriesCalculator(Calculator):
