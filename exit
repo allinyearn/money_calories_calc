@@ -1,0 +1,71 @@
+[33mcommit 82e2a39989965fbbeb61e869cedd4caf7ce1a67e[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Александр <ruyearn@gmail.com>
+Date:   Tue Mar 23 20:07:47 2021 +0300
+
+    final release
+
+[33mcommit 4b2aa6c1b1689b2de6bdcfdd37f52dd4e44d8794[m
+Author: Александр <ruyearn@gmail.com>
+Date:   Tue Mar 23 18:12:54 2021 +0300
+
+    final fix 2.0
+
+[33mcommit 13726532c29c499b606425c99c70efb94fa9c6b5[m
+Author: Александр <ruyearn@gmail.com>
+Date:   Tue Mar 23 11:13:04 2021 +0300
+
+    final fix
+
+[33mcommit 540d8114488525a8719922a7e3073a290936dfa9[m
+Author: Александр <ruyearn@gmail.com>
+Date:   Tue Mar 23 11:09:47 2021 +0300
+
+    final fix
+
+[33mcommit ff1f44d02489461d68c97f33b514747bc159da38[m
+Author: Александр <ruyearn@gmail.com>
+Date:   Mon Mar 22 22:19:50 2021 +0300
+
+    fixed all commentaries except dict in cashcalc and list comp
+
+[33mcommit b509f06685dc423ba307765b4e22282a1685e7bc[m
+Author: Александр <ruyearn@gmail.com>
+Date:   Sun Mar 21 13:40:50 2021 +0300
+
+    fixed pep
+
+[33mcommit faea368bd5c10f528448b1b776435e43351db723[m
+Author: Александр <ruyearn@gmail.com>
+Date:   Sun Mar 21 13:37:45 2021 +0300
+
+    last version
+
+[33mcommit cf2f6d8dc1fa6372131ef5bbc6115b55d85f54ad[m
+Author: Александр <ruyearn@gmail.com>
+Date:   Sun Mar 21 12:52:55 2021 +0300
+
+    fixed currency
+
+[33mcommit 6c92b7e85269c6e9d8782273a7a12ed72c28c91e[m
+Author: Александр <ruyearn@gmail.com>
+Date:   Sun Mar 21 10:59:39 2021 +0300
+
+    fixed calories + added broken week_stats
+
+[33mcommit f0b799e673d2b8df641a3e467fc454133c9b29fa[m
+Author: Александр <ruyearn@gmail.com>
+Date:   Sun Mar 21 10:18:29 2021 +0300
+
+    added get_today_stats
+
+[33mcommit 1eb67975c776504f46b00c1b7e78e1c27e174e63[m
+Author: Александр <ruyearn@gmail.com>
+Date:   Thu Mar 18 14:19:52 2021 +0300
+
+    first version
+
+[33mcommit 7cff526315791fa77d77bf3b36b42362ad67b057[m
+Author: allinyearn <79584708+allinyearn@users.noreply.github.com>
+Date:   Tue Mar 16 13:07:14 2021 +0300
+
+    Initial commit
